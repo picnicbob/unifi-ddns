@@ -104,11 +104,11 @@ async function handleRequest(request) {
 	}
 
 	if (!pathname.endsWith("/update")) {
-		return new Response("Not Found.", { status: 404 });
+		return new Response("Not Found A: '" + pathname + "'", { status: 404 });
 	}
 
 	if (!request.headers.has("Authorization") && !request.url.includes("token=")) {
-		return new Response("Not Found.", { status: 404 });
+		return new Response("Not Found B:\n" + (request.headers.has("Authorization") ? "Authorization Found\n" : "Authorization Missing\n") + (request.url.includes("token=") ? "Token Found" : "Token Missing"), { status: 404 });
 	}
 
 	const { username, password } = parseBasicAuth(request);
